@@ -6,10 +6,6 @@
 
 <br>
 
-<p align="center">
-  <img alt="preview do projeto" src=".github/preview.jpg" width="100%">
-</p>
-
 ---
 
 ## Sobre
@@ -18,7 +14,7 @@ Projeto desenvolvido durante o curso Explorer da Rocketseat. Aproveitei pra pers
 
 Foi aqui que pratiquei HTML, CSS e JavaScript juntos pela primeira vez.
 
-🔗 [Acessar página](https://jvcarvalho07.github.io/devlinks)
+🔗 [Acessar página](https://jvcarvalho07.github.io/Devlinks/)
 
 ---
 
