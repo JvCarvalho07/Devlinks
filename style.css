@@ -6,32 +6,63 @@
 
 :root {
   --text-color: white;
-  --bg-url: url(./assets/bg-mobile.jpg);
   --stroke-color: rgba(255, 255, 255, 0.5);
   --surface-color: rgba(255, 255, 255, 0.05);
   --surface-color-hover: rgba(255, 255, 255, 0.08);
   --highlight-color: rgba(255, 255, 255, 0.2);
   --switch-bg-url: url(./assets/moon-stars.svg);
+  --accent: rgba(120, 180, 255, 0.8);
 }
 
 .light {
   --text-color: black;
-  --bg-url: url(./assets/bg-mobile-light.jpg);
   --stroke-color: rgba(0, 0, 0, 0.5);
   --surface-color: rgba(0, 0, 0, 0.05);
   --surface-color-hover: rgba(0, 0, 0, 0.02);
   --highlight-color: rgba(0, 0, 0, 0.1);
   --switch-bg-url: url(./assets/sun.svg);
+  --accent: rgba(30, 100, 200, 0.7);
+}
+
+html {
+  height: 100%;
+}
+
+html::before,
+html::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+html::before {
+  background: url(./assets/bg-mobile.jpg) no-repeat top center / cover;
+  opacity: 1;
+}
+
+html::after {
+  background: url(./assets/bg-mobile-light.jpg) no-repeat top center / cover;
+  opacity: 0;
+}
+
+html.light::before {
+  opacity: 0;
+}
+
+html.light::after {
+  opacity: 1;
 }
 
 body {
-  background: var(--bg-url) no-repeat top center / cover;
-  height: 100vh;
+  height: 100%;
 }
 
 body * {
   font-family: "Inter", sans-serif;
   color: var(--text-color);
+  transition: color 0.5s ease;
 }
 
 #container {
@@ -41,7 +72,6 @@ body * {
   padding: 0 24px;
 }
 
-/* profile */
 #profile {
   text-align: center;
   padding: 24px;
@@ -52,7 +82,10 @@ body * {
   height: 112px;
   border-radius: 50%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  transition: outline-color 0.5s ease;
 }
 
 #profile p {
@@ -61,7 +94,6 @@ body * {
   margin-top: 8px;
 }
 
-/* switch */
 #switch {
   position: relative;
   width: 64px;
@@ -76,13 +108,11 @@ body * {
   border: 0;
   border-radius: 50%;
   cursor: pointer;
-
   position: absolute;
   top: 50%;
   left: 0;
   z-index: 1;
   transform: translateY(-50%);
-
   animation: slide-back 0.2s;
 }
 
@@ -103,9 +133,11 @@ body * {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border-radius: 9999px;
+  transition:
+    background 0.5s ease,
+    border-color 0.5s ease;
 }
 
-/* links */
 ul {
   list-style: none;
   display: flex;
@@ -118,28 +150,28 @@ ul li a {
   display: flex;
   align-items: center;
   justify-content: center;
-
   padding: 16px 24px;
-
   background: var(--surface-color);
   border: 1px solid var(--stroke-color);
   border-radius: 8px;
-
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-
   text-decoration: none;
   font-weight: 500;
-
-  transition: background 0.2s;
+  transition:
+    background 0.2s,
+    border 0.2s,
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 ul li a:hover {
   background: var(--surface-color-hover);
   border: 1.5px solid var(--text-color);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* social links */
 #social-links {
   display: flex;
   justify-content: center;
@@ -177,24 +209,29 @@ footer a:hover {
   opacity: 1;
 }
 
-/* media queries */
 @media (min-width: 700px) {
-  :root {
-    --bg-url: url(./assets/bg-desktop.jpg);
+  html::before {
+    background-image: url(./assets/bg-desktop.jpg);
   }
-
-  .light {
-    --bg-url: url(./assets/bg-desktop-light.jpg);
+  html::after {
+    background-image: url(./assets/bg-desktop-light.jpg);
   }
 }
 
-/* animations */
 @keyframes slide-in {
-  from { left: 0; }
-  to   { left: 50%; }
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
 }
 
 @keyframes slide-back {
-  from { left: 50%; }
-  to   { left: 0; }
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
 }
